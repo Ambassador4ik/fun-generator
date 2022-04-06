@@ -1,11 +1,12 @@
 import random
+import seed as s
 
 
-def generate():
+def generate(seed):
     line = ""
+    j = s.gen_numbers(seed)
     for i in range(1000):
-        j = random.randint(13500, 40880)
-        line += chr(j)
+        line += chr(j[i])
     return line.encode('utf-8', 'replace').decode()
 
 

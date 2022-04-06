@@ -1,25 +1,33 @@
 import translator as tr
 import generator as g
+import seed as s
 import pyperclip
 import tkinter as tk
 import tkinter.scrolledtext as st
-from tkinter import messagebox
 from tkinter import *
 
 
-def info():
-    messagebox.showinfo('Info', 'Fun Generator by Ambassador4ik \nVersion 0.0.1')
+def grab_seed():
+    global seed
+    pyperclip.copy(seed)
 
 
 def clear():
     text.delete(1.0, END)
+    global line
+    global translated_line
+    line = ''
+    translated_line = ''
+    update_seed()
 
 
 def gen():
-    text.delete(1.0, END)
     global line
     global translated_line
-    line = g.generate()
+    global seed
+    update_seed()
+    text.delete(1.0, END)
+    line = g.generate(seed)
     translated_line = tr.translate(line)
     text.insert(tk.INSERT, translated_line)
 
@@ -43,6 +51,13 @@ def update():
 def grab_text():
     global translated_line
     pyperclip.copy(translated_line)
+
+
+def update_seed():
+    global seed
+    seed = seed_entry.get()
+    if seed == '':
+        seed = s.gen_seed()
 
 
 line = ''
@@ -72,7 +87,14 @@ clear_button.place(anchor=NE, x=390, y=330)
 grab_text_button = Button(window, text="Grab Text", width=10, command=grab_text)
 grab_text_button.place(anchor=NE, x=490, y=330)
 
-info_button = Button(window, text="Info", width=10, command=info)
-info_button.place(anchor=NE, x=590, y=330)
+grab_seed_button = Button(window, text="Grab seed", width=10, command=grab_seed)
+grab_seed_button.place(anchor=NE, x=590, y=330)
+
+seed_entry = Entry(window, width=96)
+seed_entry.place(x=10, y=365)
+
+seed = seed_entry.get()
+if seed == '':
+    seed = s.gen_seed()
 
 window.mainloop()
