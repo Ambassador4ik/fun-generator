@@ -1,0 +1,2 @@
+# fun-generator
+Makes fun
