@@ -10,6 +10,14 @@ def generate(seed):
     return line.encode('utf-8', 'replace').decode()
 
 
+def generate_random():
+    line = ""
+    j = s.rand_numbers()
+    for i in range(1000):
+        line += chr(j[i])
+    return line.encode('utf-8', 'replace').decode()
+
+
 def shuffle(line):
     st = list(line)
     random.shuffle(st)

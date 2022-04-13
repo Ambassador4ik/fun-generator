@@ -28,3 +28,10 @@ def gen_numbers(seed):
                 if count > 1001:
                     break
     return nums
+
+
+def rand_numbers():
+    nums = []
+    for i in range(1001):
+        nums.append(random.randint(13500, 40880))
+    return nums

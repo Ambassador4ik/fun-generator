@@ -9,5 +9,7 @@ def translate(st):
     for char in translated:
         if 1040 <= ord(char) <= 1106 or char in allowed:
             result += char
+        else:
+            result += ' '
 
     return ' '.join(result.split())
